@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dice Roll Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #d99ed8;
+      color : white;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .dice-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 55px;
+    }
+    .dice {
+      width: 100px;
+      height: 100px;
+      margin: 20px;
+      transition: transform 1s ease-in-out;
+    }
+    .rolling {
+      animation: spin 1s ease-in-out;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    button {
+      background-color: #966b86;
+      color: white;
+      padding: 15px 20px;
+      margin: 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+    #result {
+      font-size: 20px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    .symbol {
+      position: absolute;
+      font-size: 50px;
+      color: rgba(255, 255, 255, 0.3);
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <h1>Dice Roll Game</h1>
+  <div class="dice-container">
+    <img id="dice1" class="dice" src="dice1.jpg" alt="Dice 1">
+    <img id="dice2" class="dice" src="dice2.jpg" alt="Dice 2">
+  </div>
+  <button onclick="rollDice()">Roll Dice</button>
+  <p id="result"></p>
+
+  <script>
+    function rollDice() {
+      let dice1 = document.getElementById("dice1");
+      let dice2 = document.getElementById("dice2");
+      
+      dice1.classList.add("rolling");
+      dice2.classList.add("rolling");
+      
+      setTimeout(() => {
+        let dice1Value = Math.floor(Math.random() * 6) + 1;
+        let dice2Value = Math.floor(Math.random() * 6) + 1;
+        
+        dice1.src = "dice" + dice1Value + ".jpg";
+        dice2.src = "dice" + dice2Value + ".jpg";
+        
+        dice1.classList.remove("rolling");
+        dice2.classList.remove("rolling");
+        
+        let sum = dice1Value + dice2Value;
+        let resultText = sum % 2 === 0 ? "Congratulations!" : "You lose :(";
+        document.getElementById("result").innerText = resultText;
+      }, 1000);
+    }
+
+    function createSymbols() {
+      const symbols = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅', '✦', '✶', '❖', '✪', '✹'];
+      for (let i = 0; i < 15; i++) {
+        let symbol = document.createElement("div");
+        symbol.classList.add("symbol");
+        symbol.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+        symbol.style.top = Math.random() * 100 + "%";
+        symbol.style.left = Math.random() * 100 + "%";
+        document.body.appendChild(symbol);
+      }
+    }
+    createSymbols();
+  </script>
+  <a href="games.html">Home page</a>
+</body>
+</html>
