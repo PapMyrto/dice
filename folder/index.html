@@ -69,9 +69,8 @@
       <button class="tablinks" onclick="openForm(event, 'SignUp')">Sign Up</button>
     </div>
     
-    <!-- Login Form -->
     <div id="Login" class="form-container active">
-      <form action="/login" method="post">
+      <form onsubmit="redirectToGames(event)">
         <label for="username"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="username" required>
         
@@ -82,9 +81,8 @@
       </form>
     </div>
     
-    <!-- Sign Up Form -->
     <div id="SignUp" class="form-container">
-      <form action="/signup" method="post">
+      <form onsubmit="redirectToGames(event)">
         <label for="newusername"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="newusername" required>
         
@@ -112,7 +110,11 @@
     document.getElementById(formName).style.display = "block";
     evt.currentTarget.classList.add("active");
   }
-</script>
 
+  function redirectToGames(event) {
+    event.preventDefault();
+    window.location.href = "games.html";
+  }
+  </script>
 </body>
 </html>
