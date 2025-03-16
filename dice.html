@@ -14,6 +14,9 @@
       position: relative;
       overflow: hidden;
     }
+     .rolling {
+      animation: spin 1s ease-in-out;
+    }
     .dice-container {
       display: flex;
       justify-content: center;
@@ -21,14 +24,13 @@
       margin-top: 55px;
     }
     .dice {
-      width: 100px;
-      height: 100px;
-      margin: 20px;
-      transition: transform 1s ease-in-out;
-    }
-    .rolling {
-      animation: spin 1s ease-in-out;
-    }
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+  transition: transform 1s ease-in-out;
+  object-fit: contain;
+}
+   
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
