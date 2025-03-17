@@ -121,8 +121,9 @@
       
       if (users[username] && users[username] === password) {
         alert("Success!");
+        window.location.href = "game.html";  
       } else {
-        alert("Error");
+        alert("Error, wrong password");
       }
     });
 
