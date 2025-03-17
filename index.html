@@ -95,7 +95,8 @@
         <button type="submit">Sign Up</button>
       </form>
     </div>
-  </div>  
+  </div>
+  
   <script>
     function openForm(evt, formName) {
       document.querySelectorAll(".form-container").forEach(form => {
@@ -109,27 +110,37 @@
       document.getElementById(formName).style.display = "block";
       evt.currentTarget.classList.add("active");
     }
+
     document.getElementById("login-form").addEventListener("submit", function(event) {
       event.preventDefault();
-      
+
       const username = document.getElementById("username").value;
       const password = document.getElementById("password").value;
+
       const users = JSON.parse(localStorage.getItem("users")) || {};
       
       if (users[username] && users[username] === password) {
         alert("Success!");
       } else {
-        alert("Error!");
+        alert("Error");
       }
     });
+
     document.getElementById("signup-form").addEventListener("submit", function(event) {
       event.preventDefault();
+      
       const newUsername = document.getElementById("newusername").value;
       const newPassword = document.getElementById("newpassword").value;
+
       let users = JSON.parse(localStorage.getItem("users")) || {};
-      users[newUsername] = newPassword;
-      localStorage.setItem("users", JSON.stringify(users));
-      alert("Sign Up successful! You can now log in.");
+      
+      if (users[newUsername]) {
+        alert("Username already taken.");
+      } else {
+        users[newUsername] = newPassword;
+        localStorage.setItem("users", JSON.stringify(users));
+        alert("Success!");
+      }
     });
   </script>
 </body>
